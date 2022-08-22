@@ -95,6 +95,7 @@ export const makeSsoAuthoriser = (ports: Ports): SsoAuthoriser => {
       const existing = accountAccessDict[key];
 
       if (existing !== undefined && credentialIsValid(await existing)) {
+        console.log("found existing account session");
         return existing;
       } else {
         console.log("no existing account session");
