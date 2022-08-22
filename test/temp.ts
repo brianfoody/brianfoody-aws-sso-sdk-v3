@@ -18,12 +18,18 @@ export const exec = async () => {
   const sessions = await authoriser.init();
 
   const token = await authoriser.getFederatedAccessToken(
-    "https://d-90677e2e6d.awsapps.com/start#/",
+    "https://d-90677e2e6d.awsapps.com/start",
     "us-east-1"
   );
 
-  console.log("token");
-  console.log(token);
+  await authoriser.getAccountAccessToken(sessions[0], {
+    accountId: "532747402531",
+    permissionSet: "AdministratorAccess",
+  });
+  await authoriser.getAccountAccessToken(sessions[0], {
+    accountId: "532747402531",
+    permissionSet: "AdministratorAccess",
+  });
 };
 
 // exec();
