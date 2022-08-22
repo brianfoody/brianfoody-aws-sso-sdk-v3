@@ -36,9 +36,6 @@ export const makeSsoAuthoriser = (ports: Ports): SsoAuthoriser => {
   };
 
   const credentialIsValid = (credentials: AWSCredentials): boolean => {
-    console.log("credentials.expiration.getTime()");
-    console.log(typeof credentials.expiration);
-    console.log(credentials.expiration?.getTime());
     return (
       !!credentials?.expiration && credentials.expiration.getTime() > Date.now()
     );
@@ -97,17 +94,10 @@ export const makeSsoAuthoriser = (ports: Ports): SsoAuthoriser => {
       const key = `${accessPair.accountId}/${accessPair.permissionSet}`;
       const existing = accountAccessDict[key];
 
-      console.log("Object.keys(accountAccessDict)");
-      console.log(Object.keys(accountAccessDict));
-
-      console.log("accountAccessDict[key]");
-      console.log(accountAccessDict[key]);
-
       if (existing !== undefined && credentialIsValid(await existing)) {
-        console.log("found existing account session");
         return existing;
       } else {
-        console.log("no existing account session");
+        console.info("no existing account session");
       }
 
       // Handle the case of multiple calls by populating with promise and awaiting it
